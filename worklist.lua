@@ -56,7 +56,7 @@ while running do -- MAIN LOOP
     handleKey(param1, param2)
   end
   -- BODY
-  os.execute("clear")
+  shell.run("clear")
   print(str)
   printClearStr(str)
 end
