@@ -10,11 +10,11 @@ local str = ""
 function keyToChar(key)
   if key == keys.enter then
     return "\n"
-   else if key == keys.space then
-     return " "
-   else
-     return keys.getName(key)
-   end
+  elseif key == keys.space then
+    return " "
+  else
+    return keys.getName(key)
+  end
 end
 
 while running do
