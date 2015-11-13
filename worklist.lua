@@ -4,11 +4,12 @@
 
 
 local monitor = peripheral.wrap("left")
-
-
 local running = true
+local str = ""
+
 while running do
-  local event, str = os.pullEvent( "char" ) -- limit os.pullEvent to the 'key' event
+  local event, s = os.pullEvent( "char" ) -- limit os.pullEvent to the 'key' event
+  str = str .. s
   monitor.clear()
   monitor.setCursorPos(1,1)
   monitor.write(str)
