@@ -12,8 +12,11 @@ function keyToChar(key)
     return "\n"
   elseif key == keys.space then
     return " "
+  elseif key == keys.backspace and str ~= "" then
+    str = string.sub(str,1,-2)
+    return ""
   else
-    return keys.getName(key)
+    return ""
   end
 end
 
@@ -34,9 +37,24 @@ function printStr(str)
   end
 end
 
-while running do
+function handleKey(key, isHeld)
+  str = str .. keyToChar(key)
+end
+
+function handleChar(c)
+  str = str .. c
+end
+
+while running do -- MAIN LOOP
+  local event, param1, param2, param3 = os.pullEvent()
   local event, key, isHeld = os.pullEvent("key")
-  str = str .. keyToChar( key )
+  -- EVENT HANDLING
+  if event == "key" then
+    handleKey(param1, param2)
+  elseif event == "char" then
+    handleChar(param1)
+  end
+  -- BODY
   printClearStr(str)
 end
 
