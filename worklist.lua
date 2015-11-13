@@ -5,7 +5,7 @@
 
 local monitor = peripheral.wrap("left")
 local running = true
-local str = ""
+str = ""
 
 function keyToChar(key)
   if key == keys.enter then
@@ -14,6 +14,7 @@ function keyToChar(key)
     return " "
   elseif key == keys.backspace and str ~= "" then
     str = string.sub(str,1,-2)
+    print(str)
     return ""
   else
     return ""
