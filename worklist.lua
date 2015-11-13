@@ -47,7 +47,7 @@ end
 
 while running do -- MAIN LOOP
   local event, param1, param2, param3 = os.pullEvent()
-  local event, key, isHeld = os.pullEvent("key")
+  -- local event, key, isHeld = os.pullEvent("key")
   -- EVENT HANDLING
   if event == "key" then
     handleKey(param1, param2)
