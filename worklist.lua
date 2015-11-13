@@ -1,6 +1,6 @@
 
 
-
+-- Korwin
 
 
 local monitor = peripheral.wrap("left")
@@ -9,7 +9,8 @@ local str = ""
 
 function keyToChar(key)
   if key == keys.enter then
-    return "\n"
+    monitor.setCursorPos(1,term.getCursorPos()+1)
+    return ""
   elseif key == keys.space then
     return " "
   else
