@@ -20,10 +20,10 @@ end
 function printClearStr(str)
   monitor.clear()
   monitor.setCursorPos(1,1)
-  printClearStr(str)
+  printStr(str)
 end
 
-function printClearStr(str)
+function printStr(str)
   for c in str:gmatch"." do
     if c == "\n" then
       monitor.setCursorPos(1,monitor.getCursorPos().y+1)
