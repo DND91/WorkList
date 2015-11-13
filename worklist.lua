@@ -26,7 +26,7 @@ end
 function printStr(str)
   for c in str:gmatch"." do
     if c == "\n" then
-      local y = monitor.getCursorPos().y
+      local x, y = monitor.getCursorPos()
       monitor.setCursorPos(1,y+1)
     else
       monitor.write(c)
