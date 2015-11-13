@@ -5,7 +5,7 @@
 
 local monitor = peripheral.wrap("left")
 local running = true
-str = ""
+local str = ""
 
 function keyToChar(key)
   if key == keys.enter then
@@ -13,8 +13,7 @@ function keyToChar(key)
   elseif key == keys.space then
     return " "
   elseif key == keys.backspace and str ~= "" then
-    str = string.sub(str,1,-2)
-    print(str)
+    str = string.sub(str,1,#str-1)
     return ""
   else
     return ""
@@ -39,7 +38,8 @@ function printStr(str)
 end
 
 function handleKey(key, isHeld)
-  str = str .. keyToChar(key)
+  local c = keyToChar(key)
+  str = str .. c
 end
 
 function handleChar(c)
@@ -56,6 +56,7 @@ while running do -- MAIN LOOP
     handleKey(param1, param2)
   end
   -- BODY
+  print(str)
   printClearStr(str)
 end
 
