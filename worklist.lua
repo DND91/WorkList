@@ -49,10 +49,10 @@ while running do -- MAIN LOOP
   local event, param1, param2, param3 = os.pullEvent()
   -- local event, key, isHeld = os.pullEvent("key")
   -- EVENT HANDLING
-  if event == "key" then
-    handleKey(param1, param2)
-  elseif event == "char" then
+  if event == "char" then
     handleChar(param1)
+  elseif event == "key" then
+    handleKey(param1, param2)
   end
   -- BODY
   printClearStr(str)
