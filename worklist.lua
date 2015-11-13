@@ -8,8 +8,8 @@ local running = true
 local str = ""
 
 while running do
-  local event, s = os.pullEvent( "char" ) -- limit os.pullEvent to the 'key' event
-  str = str .. s
+  local event, key, isHeld = os.pullEvent("key")
+  str = str .. keys.getName( key )
   monitor.clear()
   monitor.setCursorPos(1,1)
   monitor.write(str)
