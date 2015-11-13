@@ -1,6 +1,6 @@
 
 
--- Korwin
+-- I'M KORWIN A RETARTED WORKSHOP LIST!!
 
 
 local monitor = peripheral.wrap("left")
@@ -9,8 +9,7 @@ local str = ""
 
 function keyToChar(key)
   if key == keys.enter then
-    monitor.setCursorPos(1,term.getCursorPos()+1)
-    return ""
+    return "\n"
   elseif key == keys.space then
     return " "
   else
@@ -18,12 +17,26 @@ function keyToChar(key)
   end
 end
 
+function printClearStr(str)
+  monitor.clear()
+  monitor.setCursorPos(1,1)
+  printClearStr(str)
+end
+
+function printClearStr(str)
+  for c in str:gmatch"." do
+    if c == "\n" then
+      monitor.setCursorPos(1,monitor.getCursorPos().y+1)
+    else
+      monitor.write(c)
+    end
+  end
+end
+
 while running do
   local event, key, isHeld = os.pullEvent("key")
   str = str .. keyToChar( key )
-  monitor.clear()
-  monitor.setCursorPos(1,1)
-  monitor.write(str)
+  printClearStr(str)
 end
 
 
