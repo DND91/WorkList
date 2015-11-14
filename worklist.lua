@@ -67,6 +67,9 @@ function printCell(content)
   end
   monitor.setCursorPos(x,y+tableHeight)
   printStr(repeats("=", tableWidth))
+  
+  monitor.setCursorPos(x+(tableWidth-#content)/2,y+(tableHeight/2))
+  printStr(content)
 end
 
 while running do -- MAIN LOOP
