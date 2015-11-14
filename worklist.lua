@@ -117,14 +117,22 @@ function printTableMonitor()
   end
 end
 
+function printCenterCon(txt)
+  local x, y = monitor.getCursorPos()
+  local w, h = term.getSize()
+  term.setCursorPos(math.floor(w - #txt)/2, y)
+  print(txt)
+end
+
 function screenHandler()
   if screennr == 0 then
-    print(" === MENU === ")
-    print("1. Tasks")
-    print("2. Workers")
-    print("3. Status")
-    print("4. Exit")
-    print("Choose menu: " + str)
+    printCenterCon(" === MENU === ")
+    printCenterCon("1. Tasks")
+    printCenterCon("2. Workers")
+    printCenterCon("3. Status")
+    printCenterCon("4. Exit")
+    printCenterCon("- Choose menu -")
+    printCenterCon(str)
   end
 end
 
