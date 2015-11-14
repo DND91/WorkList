@@ -9,7 +9,29 @@ local monitor = peripheral.wrap("left")
 local running = true
 local input = ""
 local answer = ""
+
 local screennr = 0
+
+-- screens
+-- 0. main menu
+
+-- 1. tasks
+
+-- 11. add task
+-- 12. remove task
+-- 13. update task
+
+-- 2. workers
+
+-- 21. add worker
+-- 22. remove worker
+-- 23. update worker
+
+-- 3. status
+
+-- 31. add status
+-- 32. remove status
+-- 33. update status
 
 local tableWidth = 36
 local tableHeight = 4
@@ -126,7 +148,7 @@ function printCenterCon(txt)
 end
 
 function screenHandler()
-  if screennr == 0 then
+  if screennr == 0 then -- MAIN MENU
     printCenterCon(" === MENU === ")
     printCenterCon("1. Tasks")
     printCenterCon("2. Workers")
@@ -135,22 +157,95 @@ function screenHandler()
     printCenterCon("Answer: " .. answer)
     printCenterCon("- Choose menu -")
     printCenterCon(input)
+  elseif screennr == 1 then -- TASKS
+    printCenterCon(" === TASKS === ")
+    printCenterCon("1. Add")
+    printCenterCon("2. Remove")
+    printCenterCon("3. Update")
+    printCenterCon("4. Exit")
+    printCenterCon("Answer: " .. answer)
+    printCenterCon("- Choose menu -")
+    printCenterCon(input)
+  elseif screennr == 2 then -- WORKERS
+  printCenterCon(" === WORKERS === ")
+    printCenterCon("1. Add")
+    printCenterCon("2. Remove")
+    printCenterCon("3. Update")
+    printCenterCon("4. Exit")
+    printCenterCon("Answer: " .. answer)
+    printCenterCon("- Choose menu -")
+    printCenterCon(input)
+  elseif screennr == 3 then -- STATUS
+    printCenterCon(" === STATUS === ")
+    printCenterCon("1. Add")
+    printCenterCon("2. Remove")
+    printCenterCon("3. Update")
+    printCenterCon("4. Exit")
+    printCenterCon("Answer: " .. answer)
+    printCenterCon("- Choose menu -")
+    printCenterCon(input)
   end
 end
 
 function screenEnterHandler(key)
-  if screennr == 0 then
+  if screennr == 0 then -- MAIN MENU
     if "1" == input then -- Tasks
-    
+      screennr = 1
     elseif "2" == input then -- Workers
-    
+      screennr = 2
     elseif "3" == input then -- Status
-    
+      screennr = 3
     elseif "4" == input then -- Exit
       running = false
     else
-      answer = "Error on input."
+      answer = "Error on input (" .. input .. ")"
     end
+    answer = ""
+    input = ""
+    return ""
+  elseif screennr == 1 then -- TASKS
+    if "1" == input then -- Add
+      
+    elseif "2" == input then -- Remove
+      
+    elseif "3" == input then -- Update
+      
+    elseif "4" == input then -- Exit
+      running = false
+    else
+      answer = "Error on input (" .. input .. ")"
+    end
+    answer = ""
+    input = ""
+    return ""
+  elseif screennr == 2 then -- WORKERS
+    if "1" == input then -- Add
+      
+    elseif "2" == input then -- Remove
+      
+    elseif "3" == input then -- Update
+      
+    elseif "4" == input then -- Exit
+      running = false
+    else
+      answer = "Error on input (" .. input .. ")"
+    end
+    answer = ""
+    input = ""
+    return ""
+  elseif screennr == 3 then -- STATUS
+    if "1" == input then -- Add
+      
+    elseif "2" == input then -- Remove
+      
+    elseif "3" == input then -- Update
+      
+    elseif "4" == input then -- Exit
+      running = false
+    else
+      answer = "Error on input (" .. input .. ")"
+    end
+    answer = ""
     input = ""
     return ""
   end
