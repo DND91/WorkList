@@ -2,13 +2,54 @@
 
 -- I'M KORWIN A RETARTED WORKSHOP LIST!!
 
+-- VARIABELS --
 
 local monitor = peripheral.wrap("left")
 local running = true
 local str = ""
 
 local tableWidth = 40
-local tableHeight = 3
+local tableHeight = 4
+
+local cells = {}
+
+Cell = {}
+Cell.__index = Cell
+
+function Cell.create()
+   local cell = {}             -- our new object
+   setmetatable(cell,Cell)  -- make Account handle lookup
+   cell.status = "Nonactive"      -- initialize our object
+   cell.task = "X"
+   cell.worker = "none"
+   return cell
+end
+
+function Cell:printCell()
+  local x, y = monitor.getCursorPos()
+  local w,h = monitor.getSize()
+  printStr(repeats("=", tableWidth))
+  for i=1, tableHeight-1, 1 do
+    monitor.setCursorPos(x,y+i)
+    printStr("||")
+    monitor.setCursorPos(x+tableWidth-2,y+i)
+    printStr("||")
+  end
+  monitor.setCursorPos(x,y+tableHeight)
+  printStr(repeats("=", tableWidth))
+  monitor.setCursorPos(x+(tableWidth-#content)/2,y+(tableHeight/2)-1)
+  printStr(self.status)
+  monitor.setCursorPos(x+(tableWidth-#content)/2,y+(tableHeight/2))
+  printStr(self.task)
+  monitor.setCursorPos(x+(tableWidth-#content)/2,y+(tableHeight/2)+1)
+  printStr(self.worker)
+end
+
+for i=0,20,1 do
+  table.insert(cells, Cell.create())
+end
+
+-- FUNCTIONS --
  
 function repeats(s, n) return n > 0 and s .. repeats(s, n-1) or "" end
 
@@ -55,21 +96,22 @@ function handleChar(c)
   str = str .. c
 end
 
-function printCell(content)
-  local x, y = monitor.getCursorPos()
+function printTableMonitor()
   local w,h = monitor.getSize()
-  printStr(repeats("=", tableWidth))
-  for i=1, tableHeight-1, 1 do
-    monitor.setCursorPos(x,y+i)
-    printStr("||")
-    monitor.setCursorPos(x+tableWidth-2,y+i)
-    printStr("||")
-  end
-  monitor.setCursorPos(x,y+tableHeight)
-  printStr(repeats("=", tableWidth))
+  local x, y = monitor.getCursorPos()
   
-  monitor.setCursorPos(x+(tableWidth-#content)/2,y+(tableHeight/2))
-  printStr(content)
+  for cell in cells do
+    monitor.setCursorPos(x,y)
+    cell.printCell()
+    x = x + tableWidth
+    if w <= x then
+      y = y + tableHeight
+      x = 1
+      if h <= y then
+        return
+      end
+    end
+  end
 end
 
 while running do -- MAIN LOOP
@@ -84,9 +126,9 @@ while running do -- MAIN LOOP
   -- BODY
   shell.run("clear")
   print(str)
-  printClearStr(str)
-  monitor.setCursorPos(10,10)
-  printCell("CATS CATS CATS")
+  monitor.clear()
+  monitor.setCursorPos(1,1)
+  printTableMonitor()
 end
 
 
