@@ -8,7 +8,7 @@ local monitor = peripheral.wrap("left")
 local running = true
 local str = ""
 
-local tableWidth = 40
+local tableWidth = 38
 local tableHeight = 4
 
 local cells = {}
