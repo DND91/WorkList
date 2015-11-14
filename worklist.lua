@@ -8,8 +8,8 @@ local running = true
 local str = ""
 
 local tableWidth = 40
-local tableHeight = 30
-
+local tableHeight = 3
+ 
 function repeats(s, n) return n > 0 and s .. repeats(s, n-1) or "" end
 
 function keyToChar(key)
