@@ -118,7 +118,7 @@ function printTableMonitor()
 end
 
 function printCenterCon(txt)
-  local x, y = monitor.getCursorPos()
+  local x, y = term.getCursorPos()
   local w, h = term.getSize()
   term.setCursorPos(math.floor(w - #txt)/2, y)
   print(txt)
@@ -173,6 +173,7 @@ while running do -- MAIN LOOP
   printTableMonitor()
   -- CONSOLE
   shell.run("clear")
+  term.setCursorPos(1, 1)
   screenHandler()
 end
 
