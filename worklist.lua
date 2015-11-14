@@ -16,13 +16,12 @@ local cells = {}
 Cell = {}
 Cell.__index = Cell
 
-function Cell.create()
-   local cell = {}             -- our new object
-   setmetatable(cell,Cell)  -- make Account handle lookup
-   cell.status = "Nonactive"      -- initialize our object
-   cell.task = "X"
-   cell.worker = "none"
-   return cell
+function Cell.create()          -- our new object
+   local self = setmetatable({},Cell)  -- make Account handle lookup
+   self.status = "Nonactive"      -- initialize our object
+   self.task = "X"
+   self.worker = "none"
+   return self
 end
 
 function Cell:printCell()
@@ -102,12 +101,12 @@ function printTableMonitor()
   
   for key,cell in pairs(cells) do
     monitor.setCursorPos(x,y)
-    cell.printCell()
+    cell:printCell()
     x = x + tableWidth
-    if w <= x then
+    if w <= (x+tableWidth) then
       y = y + tableHeight
       x = 1
-      if h <= y then
+      if h <= (y + tableHeight) then
         return
       end
     end
