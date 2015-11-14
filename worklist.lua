@@ -7,6 +7,11 @@ local monitor = peripheral.wrap("left")
 local running = true
 local str = ""
 
+local tableWidth = 100
+local tableHeight = 50
+
+function repeats(s, n) return n > 0 and s .. repeats(s, n-1) or "" end
+
 function keyToChar(key)
   if key == keys.enter then
     return "\n"
@@ -26,11 +31,15 @@ function printClearStr(str)
   printStr(str)
 end
 
+function moveDown()
+  local x, y = monitor.getCursorPos()
+  monitor.setCursorPos(1,y+1)
+end
+
 function printStr(str)
   for c in str:gmatch"." do
     if c == "\n" then
-      local x, y = monitor.getCursorPos()
-      monitor.setCursorPos(1,y+1)
+      moveDown()
     else
       monitor.write(c)
     end
@@ -46,6 +55,20 @@ function handleChar(c)
   str = str .. c
 end
 
+function printCell(content)
+  local x, y = monitor.getCursorPos()
+  local w,h = mon.getSize()
+  printStr(repeats("=", tableWidth))
+  for i=1, tableHeight-2, 1 do
+    monitor.setCursorPos(x,y+i)
+    printStr("||")
+    monitor.setCursorPos(x+tableWidth-2,y+i)
+    printStr("||")
+  end
+  monitor.setCursorPos(x,y+tableHeight)
+  printStr(repeats("=", tableWidth))
+end
+
 while running do -- MAIN LOOP
   local event, param1, param2, param3 = os.pullEvent()
   -- local event, key, isHeld = os.pullEvent("key")
@@ -59,6 +82,8 @@ while running do -- MAIN LOOP
   shell.run("clear")
   print(str)
   printClearStr(str)
+  monitor.setCursorPos(10,10)
+  printCell("CATS CATS CATS")
 end
 
 
