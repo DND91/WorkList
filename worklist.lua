@@ -5,10 +5,12 @@
 -- VARIABELS --
 
 local monitor = peripheral.wrap("left")
+
 local running = true
 local str = ""
+local screennr = 0
 
-local tableWidth = 38
+local tableWidth = 36
 local tableHeight = 4
 local tableSpace = 1
 
@@ -55,7 +57,7 @@ function repeats(s, n) return n > 0 and s .. repeats(s, n-1) or "" end
 
 function keyToChar(key)
   if key == keys.enter then
-    return "\n"
+    return screenEnterHandler()
   elseif key == keys.space then
     return " "
   elseif key == keys.backspace and str ~= "" then
@@ -115,6 +117,35 @@ function printTableMonitor()
   end
 end
 
+function screenHandler()
+  if screennr == 0 then
+    print(" === MENU === ")
+    print("1. Tasks")
+    print("2. Workers")
+    print("3. Status")
+    print("4. Exit")
+    print("Choose menu: " + str)
+  end
+end
+
+function screenEnterHandler(key)
+  if screennr == 0 then
+    if "1" == str then -- Tasks
+    
+    elseif "2" == str then -- Workers
+    
+    elseif "3" == str then -- Status
+    
+    elseif "4" == str then -- Exit
+      running = false
+      str = ""
+      return ""
+    end
+  end
+  
+  return "\n"
+end
+
 while running do -- MAIN LOOP
   local event, param1, param2, param3 = os.pullEvent()
   -- local event, key, isHeld = os.pullEvent("key")
@@ -125,14 +156,16 @@ while running do -- MAIN LOOP
     handleKey(param1, param2)
   end
   -- BODY
-  shell.run("clear")
-  print(str)
+  -- MONITOR
   monitor.clear()
   local w,h = monitor.getSize()
-  local x = (w - math.floor(w/(tableWidth+tableSpace)) * (tableWidth+tableSpace)) / 2
+  local x = (w - math.floor(w/(tableWidth+tableSpace)) * (tableWidth+tableSpace)) / 2 + 1
   
   monitor.setCursorPos(x,tableSpace)
   printTableMonitor()
+  -- CONSOLE
+  shell.run("clear")
+  screenHandler()
 end
 
 
