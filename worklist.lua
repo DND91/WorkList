@@ -108,7 +108,7 @@ function printTableMonitor()
     if w <= (x+tableWidth + tableSpace) then
       y = y + tableHeight + tableSpace
       x = sx
-      if h <= (y + 2*(tableHeight + tableSpace)) then
+      if h <= (y + 1*(tableHeight + tableSpace)) then
         return
       end
     end
@@ -128,7 +128,10 @@ while running do -- MAIN LOOP
   shell.run("clear")
   print(str)
   monitor.clear()
-  monitor.setCursorPos(2,2)
+  local w,h = monitor.getSize()
+  local x = (w - math.floor(w/(tableWidth+tableSpace)) * (tableWidth+tableSpace)) / 2
+  
+  monitor.setCursorPos(x,tableSpace)
   printTableMonitor()
 end
 
