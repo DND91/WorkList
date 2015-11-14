@@ -7,8 +7,8 @@ local monitor = peripheral.wrap("left")
 local running = true
 local str = ""
 
-local tableWidth = 20
-local tableHeight = 10
+local tableWidth = 40
+local tableHeight = 30
 
 function repeats(s, n) return n > 0 and s .. repeats(s, n-1) or "" end
 
@@ -59,7 +59,7 @@ function printCell(content)
   local x, y = monitor.getCursorPos()
   local w,h = monitor.getSize()
   printStr(repeats("=", tableWidth))
-  for i=1, tableHeight-2, 1 do
+  for i=1, tableHeight-1, 1 do
     monitor.setCursorPos(x,y+i)
     printStr("||")
     monitor.setCursorPos(x+tableWidth-2,y+i)
