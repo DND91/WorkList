@@ -57,7 +57,7 @@ end
 
 function printCell(content)
   local x, y = monitor.getCursorPos()
-  local w,h = mon.getSize()
+  local w,h = monitor.getSize()
   printStr(repeats("=", tableWidth))
   for i=1, tableHeight-2, 1 do
     monitor.setCursorPos(x,y+i)
