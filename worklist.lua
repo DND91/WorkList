@@ -7,7 +7,8 @@
 local monitor = peripheral.wrap("left")
 
 local running = true
-local str = ""
+local input = ""
+local answer = ""
 local screennr = 0
 
 local tableWidth = 36
@@ -30,21 +31,21 @@ end
 function Cell:printCell()
   local x, y = monitor.getCursorPos()
   local w,h = monitor.getSize()
-  printStr(repeats("=", tableWidth))
+  printinput(repeats("=", tableWidth))
   for i=1, tableHeight-1, 1 do
     monitor.setCursorPos(x,y+i)
-    printStr("||")
+    printinput("||")
     monitor.setCursorPos(x+tableWidth-2,y+i)
-    printStr("||")
+    printinput("||")
   end
   monitor.setCursorPos(x,y+tableHeight)
-  printStr(repeats("=", tableWidth))
+  printinput(repeats("=", tableWidth))
   monitor.setCursorPos(x+(tableWidth-#self.status)/2,y+(tableHeight/2)-1)
-  printStr(self.status)
+  printinput(self.status)
   monitor.setCursorPos(x+(tableWidth-#self.task)/2,y+(tableHeight/2))
-  printStr(self.task)
+  printinput(self.task)
   monitor.setCursorPos(x+(tableWidth-#self.worker)/2,y+(tableHeight/2)+1)
-  printStr(self.worker)
+  printinput(self.worker)
 end
 
 for i=0,20,1 do
@@ -60,18 +61,18 @@ function keyToChar(key)
     return screenEnterHandler()
   elseif key == keys.space then
     return " "
-  elseif key == keys.backspace and str ~= "" then
-    str = string.sub(str,1,#str-1)
+  elseif key == keys.backspace and input ~= "" then
+    input = inputing.sub(input,1,#input-1)
     return ""
   else
     return ""
   end
 end
 
-function printClearStr(str)
+function printClearinput(input)
   monitor.clear()
   monitor.setCursorPos(1,1)
-  printStr(str)
+  printinput(input)
 end
 
 function moveDown()
@@ -79,8 +80,8 @@ function moveDown()
   monitor.setCursorPos(1,y+1)
 end
 
-function printStr(str)
-  for c in str:gmatch"." do
+function printinput(input)
+  for c in input:gmatch"." do
     if c == "\n" then
       moveDown()
     else
@@ -91,11 +92,11 @@ end
 
 function handleKey(key, isHeld)
   local c = keyToChar(key)
-  str = str .. c
+  input = input .. c
 end
 
 function handleChar(c)
-  str = str .. c
+  input = input .. c
 end
 
 function printTableMonitor()
@@ -131,23 +132,26 @@ function screenHandler()
     printCenterCon("2. Workers")
     printCenterCon("3. Status")
     printCenterCon("4. Exit")
+    printCenterCon("Answer: " .. answer)
     printCenterCon("- Choose menu -")
-    printCenterCon(str)
+    printCenterCon(input)
   end
 end
 
 function screenEnterHandler(key)
   if screennr == 0 then
-    if "1" == str then -- Tasks
+    if "1" == input then -- Tasks
     
-    elseif "2" == str then -- Workers
+    elseif "2" == input then -- Workers
     
-    elseif "3" == str then -- Status
+    elseif "3" == input then -- Status
     
-    elseif "4" == str then -- Exit
+    elseif "4" == input then -- Exit
       running = false
+    else
+      answer = "Error on input."
     end
-    str = ""
+    input = ""
     return ""
   end
   
