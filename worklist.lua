@@ -191,61 +191,73 @@ function screenEnterHandler(key)
   if screennr == 0 then -- MAIN MENU
     if "1" == input then -- Tasks
       screennr = 1
+      answer = ""
     elseif "2" == input then -- Workers
       screennr = 2
+      answer = ""
     elseif "3" == input then -- Status
       screennr = 3
+      answer = ""
     elseif "4" == input then -- Exit
       running = false
+      answer = ""
     else
       answer = "Error on input (" .. input .. ")"
     end
-    answer = ""
     input = ""
     return ""
   elseif screennr == 1 then -- TASKS
     if "1" == input then -- Add
       
+      answer = ""
     elseif "2" == input then -- Remove
       
+      answer = ""
     elseif "3" == input then -- Update
       
+      answer = ""
     elseif "4" == input then -- Back
       screennr = 0
+      answer = ""
     else
       answer = "Error on input (" .. input .. ")"
     end
-    answer = ""
     input = ""
     return ""
   elseif screennr == 2 then -- WORKERS
     if "1" == input then -- Add
       
+      answer = ""
     elseif "2" == input then -- Remove
       
+      answer = ""
     elseif "3" == input then -- Update
       
+      answer = ""
     elseif "4" == input then -- Back
       screennr = 0
+      answer = ""
     else
       answer = "Error on input (" .. input .. ")"
     end
-    answer = ""
     input = ""
     return ""
   elseif screennr == 3 then -- STATUS
     if "1" == input then -- Add
       
+      answer = ""
     elseif "2" == input then -- Remove
       
+      answer = ""
     elseif "3" == input then -- Update
       
+      answer = ""
     elseif "4" == input then -- Back
       screennr = 0
+      answer = ""
     else
       answer = "Error on input (" .. input .. ")"
     end
-    answer = ""
     input = ""
     return ""
   end
