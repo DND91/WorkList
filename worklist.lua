@@ -10,6 +10,7 @@ local str = ""
 
 local tableWidth = 38
 local tableHeight = 4
+local tableSpace = 1
 
 local cells = {}
 
@@ -103,11 +104,11 @@ function printTableMonitor()
   for key,cell in pairs(cells) do
     monitor.setCursorPos(x,y)
     cell:printCell()
-    x = x + tableWidth
-    if w <= (x+tableWidth) then
-      y = y + tableHeight
+    x = x + tableWidth + tableSpace
+    if w <= (x+tableWidth + tableSpace) then
+      y = y + tableHeight + tableSpace
       x = sx
-      if h <= (y + 2*tableHeight) then
+      if h <= (y + 2*(tableHeight + tableSpace)) then
         return
       end
     end
