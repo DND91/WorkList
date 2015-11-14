@@ -100,7 +100,7 @@ function printTableMonitor()
   local w,h = monitor.getSize()
   local x, y = monitor.getCursorPos()
   
-  for cell in cells do
+  for key,cell in pairs(cells) do
     monitor.setCursorPos(x,y)
     cell.printCell()
     x = x + tableWidth
