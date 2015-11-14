@@ -37,11 +37,11 @@ function Cell:printCell()
   end
   monitor.setCursorPos(x,y+tableHeight)
   printStr(repeats("=", tableWidth))
-  monitor.setCursorPos(x+(tableWidth-#content)/2,y+(tableHeight/2)-1)
+  monitor.setCursorPos(x+(tableWidth-#self.status)/2,y+(tableHeight/2)-1)
   printStr(self.status)
-  monitor.setCursorPos(x+(tableWidth-#content)/2,y+(tableHeight/2))
+  monitor.setCursorPos(x+(tableWidth-#self.task)/2,y+(tableHeight/2))
   printStr(self.task)
-  monitor.setCursorPos(x+(tableWidth-#content)/2,y+(tableHeight/2)+1)
+  monitor.setCursorPos(x+(tableWidth-#self.worker)/2,y+(tableHeight/2)+1)
   printStr(self.worker)
 end
 
