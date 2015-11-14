@@ -7,8 +7,8 @@ local monitor = peripheral.wrap("left")
 local running = true
 local str = ""
 
-local tableWidth = 100
-local tableHeight = 50
+local tableWidth = 20
+local tableHeight = 10
 
 function repeats(s, n) return n > 0 and s .. repeats(s, n-1) or "" end
 
