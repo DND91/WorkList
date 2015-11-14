@@ -98,6 +98,7 @@ end
 function printTableMonitor()
   local w,h = monitor.getSize()
   local x, y = monitor.getCursorPos()
+  local sx = x
   
   for key,cell in pairs(cells) do
     monitor.setCursorPos(x,y)
@@ -105,7 +106,7 @@ function printTableMonitor()
     x = x + tableWidth
     if w <= (x+tableWidth) then
       y = y + tableHeight
-      x = 1
+      x = sx
       if h <= (y + 2*tableHeight) then
         return
       end
