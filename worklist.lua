@@ -162,7 +162,7 @@ function screenHandler()
     printCenterCon("1. Add")
     printCenterCon("2. Remove")
     printCenterCon("3. Update")
-    printCenterCon("4. Exit")
+    printCenterCon("4. Back")
     printCenterCon("Answer: " .. answer)
     printCenterCon("- Choose menu -")
     printCenterCon(input)
@@ -171,7 +171,7 @@ function screenHandler()
     printCenterCon("1. Add")
     printCenterCon("2. Remove")
     printCenterCon("3. Update")
-    printCenterCon("4. Exit")
+    printCenterCon("4. Back")
     printCenterCon("Answer: " .. answer)
     printCenterCon("- Choose menu -")
     printCenterCon(input)
@@ -180,7 +180,7 @@ function screenHandler()
     printCenterCon("1. Add")
     printCenterCon("2. Remove")
     printCenterCon("3. Update")
-    printCenterCon("4. Exit")
+    printCenterCon("4. Back")
     printCenterCon("Answer: " .. answer)
     printCenterCon("- Choose menu -")
     printCenterCon(input)
@@ -210,8 +210,8 @@ function screenEnterHandler(key)
       
     elseif "3" == input then -- Update
       
-    elseif "4" == input then -- Exit
-      running = false
+    elseif "4" == input then -- Back
+      screennr = 0
     else
       answer = "Error on input (" .. input .. ")"
     end
@@ -225,8 +225,8 @@ function screenEnterHandler(key)
       
     elseif "3" == input then -- Update
       
-    elseif "4" == input then -- Exit
-      running = false
+    elseif "4" == input then -- Back
+      screennr = 0
     else
       answer = "Error on input (" .. input .. ")"
     end
@@ -240,8 +240,8 @@ function screenEnterHandler(key)
       
     elseif "3" == input then -- Update
       
-    elseif "4" == input then -- Exit
-      running = false
+    elseif "4" == input then -- Back
+      screennr = 0
     else
       answer = "Error on input (" .. input .. ")"
     end
