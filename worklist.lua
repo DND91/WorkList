@@ -138,9 +138,9 @@ function screenEnterHandler(key)
     
     elseif "4" == str then -- Exit
       running = false
-      str = ""
-      return ""
     end
+    str = ""
+    return ""
   end
   
   return "\n"
