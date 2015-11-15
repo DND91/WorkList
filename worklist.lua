@@ -99,12 +99,12 @@ function keyToChar(key)
     input = inputing.sub(input,1,#input-1)
     if screennr == 21 then
       if input == "" and temp ~= nil then
-        if temp.color == nil then
-          input = temp.abre
-          temp.abre = nil
-        elseif temp.abre == nil then
+        if temp.abre == nil then
           input = temp.name
           temp.name = nil
+        elseif temp.color == nil then
+          input = temp.abre
+          temp.abre = nil
         end
       end
     end
