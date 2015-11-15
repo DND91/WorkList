@@ -4,7 +4,12 @@
 
 -- VARIABELS --
 
+local taskMode = true
+
 local monitor = peripheral.wrap("left")
+local tp = touchpoint.new("left")
+
+tp:add("Toggle", function() toggleMode() taskMode = not taskMode end, 2, 2, 14, 11, colors.red, colors.lime)
 
 local running = true
 local input = ""
@@ -103,7 +108,7 @@ function keyToChar(key)
         if input == "" and temp ~= nil then
           if temp.name == nil then
             screennr = 2
-          if temp.abre == nil then
+          elseif temp.abre == nil then
             input = temp.name
             temp.name = nil
           elseif temp.color == nil then
@@ -310,6 +315,8 @@ function screenEnterHandler(key)
       temp.color = number
       screennr = 2
       answer = "Worker added..."
+      table.insert(workers, temp)
+      temp = nil
     end
     input = ""
     return ""
@@ -326,15 +333,26 @@ while running do -- MAIN LOOP
     handleChar(param1)
   elseif event == "key" then
     handleKey(param1, param2)
+  elseif event == "button_click" then
+    tp:toggleButton(param1)
   end
   -- BODY
   -- MONITOR
+  
+  
   monitor.clear()
   local w,h = monitor.getSize()
   local x = (w - math.floor(w/(tableWidth+tableSpace)) * (tableWidth+tableSpace)) / 2 + 1
   
   monitor.setCursorPos(x,tableSpace)
-  printTableMonitor()
+  if taskMode then
+    printTableMonitor()
+  else
+  
+  end
+  
+  tp:draw()
+  
   -- CONSOLE
   shell.run("clear")
   term.setCursorPos(1, 1)
