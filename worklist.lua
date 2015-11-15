@@ -13,11 +13,16 @@ local tp = touchpoint.new("left")
 
 local w, h = monitor.getSize()
 
-function() toggleMode() 
+function toggleMode() 
   taskMode = not taskMode 
+  if taskMode then
+    tp.rename("Tasks", "Workers")
+  else
+    tp.rename("Workers", "Tasks")
+  end
 end
 
-tp:add("Toggle", toggleMode, 2, h-3, 11, h-1, colors.red, colors.lime)
+tp:add("Tasks", toggleMode, 2, h-3, 11, h-1, colors.red, colors.lime)
 
 local running = true
 local input = ""
