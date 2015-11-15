@@ -12,7 +12,7 @@ local tp = touchpoint.new("left")
 
 
 local w, h = monitor.getSize()
-tp:add("Toggle", function() toggleMode() taskMode = not taskMode end, 2, h-7, 5, 5, colors.red, colors.lime)
+tp:add("Toggle", function() toggleMode() taskMode = not taskMode end, 1, h-3, 10, h-1, colors.red, colors.lime)
 
 local running = true
 local input = ""
@@ -329,7 +329,7 @@ function screenEnterHandler(key)
 end
 
 while running do -- MAIN LOOP
-  local event, param1, param2, param3 = os.pullEvent()
+  local event, param1, param2, param3 = tp:handleEvents(os.pullEvent())
   -- local event, key, isHeld = os.pullEvent("key")
   -- EVENT HANDLING
   if event == "char" then
@@ -338,6 +338,7 @@ while running do -- MAIN LOOP
     handleKey(param1, param2)
   elseif event == "button_click" then
     tp:toggleButton(param1)
+    tp.buttonList[param2].func()
   end
   -- BODY
   -- MONITOR
@@ -350,7 +351,7 @@ while running do -- MAIN LOOP
   
   monitor.setCursorPos(x,tableSpace)
   monitor.setTextColor(colors.white)
-  term.setBackgroundColor(colors.black)
+  monitor.setBackgroundColor(colors.black)
   
   if taskMode then
     printTableMonitor()
