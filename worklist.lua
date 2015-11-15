@@ -106,6 +106,9 @@ function keyToChar(key)
           input = temp.abre
           temp.abre = nil
         end
+        if input == nil then
+          input = ""
+        end
       end
     end
     return ""
