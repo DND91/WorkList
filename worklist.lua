@@ -16,13 +16,14 @@ local w, h = monitor.getSize()
 function toggleMode() 
   taskMode = not taskMode 
   if taskMode then
-    tp.rename("Tasks", "Workers")
+    tp.rename("Toggle", "Workers")
   else
-    tp.rename("Workers", "Tasks")
+    tp.rename("Toggle", "Tasks")
   end
 end
 
-tp:add("Tasks", toggleMode, 2, h-3, 11, h-1, colors.red, colors.lime)
+tp:add("Toggle", toggleMode, 2, h-3, 11, h-1, colors.red, colors.lime)
+tp.rename("Toggle", "Tasks")
 
 local running = true
 local input = ""
