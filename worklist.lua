@@ -12,6 +12,8 @@ local answer = ""
 
 local screennr = 0
 
+local temp = nil
+
 -- screens
 -- 0. main menu
 
@@ -27,30 +29,24 @@ local screennr = 0
 -- 22. remove worker
 -- 23. update worker
 
--- 3. status
-
--- 31. add status
--- 32. remove status
--- 33. update status
-
 local tableWidth = 36
 local tableHeight = 4
 local tableSpace = 1
 
-local cells = {}
+local tasks = {}
 
-Cell = {}
-Cell.__index = Cell
+Task = {}
+Task.__index = Task
 
-function Cell.create()          -- our new object
-   local self = setmetatable({},Cell)  -- make Account handle lookup
+function Task.create()          -- our new object
+   local self = setmetatable({},Task)  -- make Account handle lookup
    self.status = "Nonactive"      -- initialize our object
    self.task = "X"
    self.worker = "none"
    return self
 end
 
-function Cell:printCell()
+function Task:printTask()
   local x, y = monitor.getCursorPos()
   local w,h = monitor.getSize()
   printinput(repeats("=", tableWidth))
@@ -70,8 +66,24 @@ function Cell:printCell()
   printinput(self.worker)
 end
 
+local workers = {}
+
+Worker = {}
+Worker.__index = Worker
+
+function Worker.create()          -- our new object
+   local self = setmetatable({},Worker)  -- make Account handle lookup
+   self.name = "NAME"      -- initialize our object
+   self.abre = "NAM"
+   self.color = colors.green
+   return self
+end
+
+
+-- DEBUG SETUP --
+
 for i=0,20,1 do
-  table.insert(cells, Cell.create())
+  table.insert(tasks, Task.create())
 end
 
 -- FUNCTIONS --
@@ -126,9 +138,9 @@ function printTableMonitor()
   local x, y = monitor.getCursorPos()
   local sx = x
   
-  for key,cell in pairs(cells) do
+  for key,cell in pairs(tasks) do
     monitor.setCursorPos(x,y)
-    cell:printCell()
+    cell:printTask()
     x = x + tableWidth + tableSpace
     if w <= (x+tableWidth + tableSpace) then
       y = y + tableHeight + tableSpace
@@ -152,8 +164,7 @@ function screenHandler()
     printCenterCon(" === MENU === ")
     printCenterCon("1. Tasks")
     printCenterCon("2. Workers")
-    printCenterCon("3. Status")
-    printCenterCon("4. Exit")
+    printCenterCon("3. Exit")
     printCenterCon("Answer: " .. answer)
     printCenterCon("- Choose menu -")
     printCenterCon(input)
@@ -167,7 +178,7 @@ function screenHandler()
     printCenterCon("- Choose menu -")
     printCenterCon(input)
   elseif screennr == 2 then -- WORKERS
-  printCenterCon(" === WORKERS === ")
+    printCenterCon(" === WORKERS === ")
     printCenterCon("1. Add")
     printCenterCon("2. Remove")
     printCenterCon("3. Update")
@@ -175,15 +186,38 @@ function screenHandler()
     printCenterCon("Answer: " .. answer)
     printCenterCon("- Choose menu -")
     printCenterCon(input)
-  elseif screennr == 3 then -- STATUS
-    printCenterCon(" === STATUS === ")
-    printCenterCon("1. Add")
-    printCenterCon("2. Remove")
-    printCenterCon("3. Update")
-    printCenterCon("4. Back")
+  elseif screennr == 21 then -- ADD WORKER
+    if temp == nil then
+      temp = Worker.Create()
+      temp.name = nil
+      temp.abre = nil
+      temp.color = nil
+    end
+    
+    printCenterCon(" === ADD WORKER === ")
     printCenterCon("Answer: " .. answer)
-    printCenterCon("- Choose menu -")
-    printCenterCon(input)
+    
+    if temp.name == nil then
+      printCenterCon("- Choose Name -")
+      printCenterCon(input)
+      return
+    else
+      printCenterCon("Name: " .. temp.name)
+    end
+    if temp.name == nil then
+      printCenterCon("- Choose Abbrevation -")
+      printCenterCon(input)
+      return
+    else
+      printCenterCon("Abbrevation: " .. temp.abre)
+    end
+    if temp.name == nil then
+      printCenterCon("- Choose Abbrevation -")
+      printCenterCon(input)
+      return
+    else
+      printCenterCon("Color: " .. temp.color)
+    end
   end
 end
 
@@ -195,10 +229,7 @@ function screenEnterHandler(key)
     elseif "2" == input then -- Workers
       screennr = 2
       answer = ""
-    elseif "3" == input then -- Status
-      screennr = 3
-      answer = ""
-    elseif "4" == input then -- Exit
+    elseif "3" == input then -- Exit
       running = false
       answer = ""
     else
@@ -208,13 +239,13 @@ function screenEnterHandler(key)
     return ""
   elseif screennr == 1 then -- TASKS
     if "1" == input then -- Add
-      
+      screennr = 11
       answer = ""
     elseif "2" == input then -- Remove
-      
+      screennr = 12
       answer = ""
     elseif "3" == input then -- Update
-      
+      screennr = 13
       answer = ""
     elseif "4" == input then -- Back
       screennr = 0
@@ -226,13 +257,13 @@ function screenEnterHandler(key)
     return ""
   elseif screennr == 2 then -- WORKERS
     if "1" == input then -- Add
-      
+      screennr = 21
       answer = ""
     elseif "2" == input then -- Remove
-      
+      screennr = 22
       answer = ""
     elseif "3" == input then -- Update
-      
+      screennr = 23
       answer = ""
     elseif "4" == input then -- Back
       screennr = 0
@@ -242,21 +273,29 @@ function screenEnterHandler(key)
     end
     input = ""
     return ""
-  elseif screennr == 3 then -- STATUS
-    if "1" == input then -- Add
-      
-      answer = ""
-    elseif "2" == input then -- Remove
-      
-      answer = ""
-    elseif "3" == input then -- Update
-      
-      answer = ""
-    elseif "4" == input then -- Back
-      screennr = 0
-      answer = ""
     else
       answer = "Error on input (" .. input .. ")"
+    end
+    input = ""
+    return ""
+  elseif screennr == 21 and temp ~= nil then -- ADD WORKER
+    if temp.name == nil then
+      if 2 < #input and #input <= 32 then
+        temp.name = input
+      else
+        answer = "Name must be between 3 to 32 letters"
+      end
+    elseif temp.abre == nil then
+      if 0 < #input and #input <= 3 then
+        temp.abre = input
+      else
+        answer = "Abbrevation must be between 1 to 3 letters"
+      end
+    elseif temp.color == nil then
+      local number = tonumber(input)
+      temp.color = number
+      screennr = 2
+      answer = "Worker added..."
     end
     input = ""
     return ""
