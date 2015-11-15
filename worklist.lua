@@ -97,6 +97,17 @@ function keyToChar(key)
     return " "
   elseif key == keys.backspace and input ~= "" then
     input = inputing.sub(input,1,#input-1)
+    if screennr == 21 then
+      if input == "" and temp ~= nil then
+        if temp.color == nil then
+          input = temp.abre
+          temp.abre = nil
+        elseif temp.abre == nil then
+          input = temp.name
+          temp.name = nil
+        end
+      end
+    end
     return ""
   else
     return ""
@@ -188,7 +199,7 @@ function screenHandler()
     printCenterCon(input)
   elseif screennr == 21 then -- ADD WORKER
     if temp == nil then
-      temp = Worker.Create()
+      temp = Worker.create()
       temp.name = nil
       temp.abre = nil
       temp.color = nil
@@ -204,15 +215,15 @@ function screenHandler()
     else
       printCenterCon("Name: " .. temp.name)
     end
-    if temp.name == nil then
+    if temp.abre == nil then
       printCenterCon("- Choose Abbrevation -")
       printCenterCon(input)
       return
     else
       printCenterCon("Abbrevation: " .. temp.abre)
     end
-    if temp.name == nil then
-      printCenterCon("- Choose Abbrevation -")
+    if temp.color == nil then
+      printCenterCon("- Choose Color -")
       printCenterCon(input)
       return
     else
