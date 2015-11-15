@@ -97,6 +97,33 @@ function Worker.create()          -- our new object
    return self
 end
 
+function Worker:printWorker()
+  local x, y = monitor.getCursorPos()
+  local w,h = monitor.getSize()
+  printinput(repeats("=", tableWidth))
+  for i=1, tableHeight-1, 1 do
+    monitor.setCursorPos(x,y+i)
+    printinput("||")
+    monitor.setCursorPos(x+tableWidth-2,y+i)
+    printinput("||")
+  end
+  monitor.setCursorPos(x,y+tableHeight)
+  printinput(repeats("=", tableWidth))
+  
+  monitor.setTextColor(self.color)
+  
+  monitor.setCursorPos(x+(tableWidth-#self.status)/2,y+(tableHeight/2)-1)
+  printinput(self.name)
+  
+  monitor.setCursorPos(x+(tableWidth-#self.task)/2,y+(tableHeight/2))
+  printinput(self.abre)
+  
+  monitor.setCursorPos(x+(tableWidth-#self.worker)/2,y+(tableHeight/2)+1)
+  printinput(self.color)
+  
+  monitor.setTextColor(colors.white)
+end
+
 
 -- DEBUG SETUP --
 
@@ -170,7 +197,7 @@ function handleChar(c)
   input = input .. c
 end
 
-function printTableMonitor()
+function printTaskTable()
   local w,h = monitor.getSize()
   local x, y = monitor.getCursorPos()
   local sx = x
@@ -178,6 +205,25 @@ function printTableMonitor()
   for key,cell in pairs(tasks) do
     monitor.setCursorPos(x,y)
     cell:printTask()
+    x = x + tableWidth + tableSpace
+    if w <= (x+tableWidth + tableSpace) then
+      y = y + tableHeight + tableSpace
+      x = sx
+      if h <= (y + 1*(tableHeight + tableSpace)) then
+        return
+      end
+    end
+  end
+end
+
+function printWorkerTable()
+  local w,h = monitor.getSize()
+  local x, y = monitor.getCursorPos()
+  local sx = x
+  
+  for key,cell in pairs(workers) do
+    monitor.setCursorPos(x,y)
+    cell:printWorker()
     x = x + tableWidth + tableSpace
     if w <= (x+tableWidth + tableSpace) then
       y = y + tableHeight + tableSpace
@@ -364,9 +410,9 @@ while running do -- MAIN LOOP
   monitor.setBackgroundColor(colors.black)
   
   if taskMode then
-    printTableMonitor()
+    printTaskTable()
   else
-  
+    printWorkerTable()
   end
   
   -- CONSOLE
