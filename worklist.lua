@@ -16,9 +16,9 @@ local w, h = monitor.getSize()
 function toggleMode() 
   taskMode = not taskMode 
   if taskMode then
-    tp:rename("Tasks", "Workers")
-  else
     tp:rename("Workers", "Tasks")
+  else
+    tp:rename("Tasks", "Workers")
   end
 end
 
