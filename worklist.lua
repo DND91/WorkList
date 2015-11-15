@@ -96,7 +96,7 @@ function keyToChar(key)
   elseif key == keys.space then
     return " "
   elseif key == keys.backspace and input ~= "" then
-    input = inputing.sub(input,1,#input-1)
+    input = string.sub(input,1,#input-1)
     if screennr == 21 then
       if input == "" and temp ~= nil then
         if temp.abre == nil then
