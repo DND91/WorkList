@@ -12,7 +12,12 @@ local tp = touchpoint.new("left")
 
 
 local w, h = monitor.getSize()
-tp:add("Toggle", function() toggleMode() taskMode = not taskMode end, 1, h-3, 10, h-1, colors.red, colors.lime)
+
+function() toggleMode() 
+  taskMode = not taskMode 
+end
+
+tp:add("Toggle", toggleMode, 2, h-3, 11, h-1, colors.red, colors.lime)
 
 local running = true
 local input = ""
@@ -338,7 +343,7 @@ while running do -- MAIN LOOP
     handleKey(param1, param2)
   elseif event == "button_click" then
     tp:toggleButton(param1)
-    tp.buttonList[param2].func()
+    tp.buttonList[param1].func()
   end
   -- BODY
   -- MONITOR
