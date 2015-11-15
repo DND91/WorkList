@@ -273,11 +273,6 @@ function screenEnterHandler(key)
     end
     input = ""
     return ""
-    else
-      answer = "Error on input (" .. input .. ")"
-    end
-    input = ""
-    return ""
   elseif screennr == 21 and temp ~= nil then -- ADD WORKER
     if temp.name == nil then
       if 2 < #input and #input <= 32 then
