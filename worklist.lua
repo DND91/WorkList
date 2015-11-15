@@ -102,7 +102,7 @@ function keyToChar(key)
       if screennr == 21 then
         if input == "" and temp ~= nil then
           if temp.name == nil then
-            screennr == 2
+            screennr = 2
           if temp.abre == nil then
             input = temp.name
             temp.name = nil
