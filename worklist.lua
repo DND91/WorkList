@@ -95,23 +95,24 @@ function keyToChar(key)
     return screenEnterHandler()
   elseif key == keys.space then
     return " "
-  elseif key == keys.backspace and then
+  elseif key == keys.backspace then
     if input ~= "" then
       input = string.sub(input,1,#input-1)
-    end
-    if screennr == 21 then
-      if input == "" and temp ~= nil then
-        if temp.name == nil then
-          screennr == 2
-        if temp.abre == nil then
-          input = temp.name
-          temp.name = nil
-        elseif temp.color == nil then
-          input = temp.abre
-          temp.abre = nil
-        end
-        if input == nil then
-          input = ""
+    else
+      if screennr == 21 then
+        if input == "" and temp ~= nil then
+          if temp.name == nil then
+            screennr == 2
+          if temp.abre == nil then
+            input = temp.name
+            temp.name = nil
+          elseif temp.color == nil then
+            input = temp.abre
+            temp.abre = nil
+          end
+          if input == nil then
+            input = ""
+          end
         end
       end
     end
