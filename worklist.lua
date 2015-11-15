@@ -1,4 +1,5 @@
 
+os.loadAPI("touchpoint")
 
 -- I'M KORWIN A RETARTED WORKSHOP LIST!!
 
@@ -9,7 +10,9 @@ local taskMode = true
 local monitor = peripheral.wrap("left")
 local tp = touchpoint.new("left")
 
-tp:add("Toggle", function() toggleMode() taskMode = not taskMode end, 2, 2, 14, 11, colors.red, colors.lime)
+
+local w, h = monitor.getSize()
+tp:add("Toggle", function() toggleMode() taskMode = not taskMode end, 2, h-7, 5, 5, colors.red, colors.lime)
 
 local running = true
 local input = ""
@@ -341,17 +344,19 @@ while running do -- MAIN LOOP
   
   
   monitor.clear()
+  tp:draw()
   local w,h = monitor.getSize()
   local x = (w - math.floor(w/(tableWidth+tableSpace)) * (tableWidth+tableSpace)) / 2 + 1
   
   monitor.setCursorPos(x,tableSpace)
+  monitor.setTextColor(colors.white)
+  term.setBackgroundColor(colors.black)
+  
   if taskMode then
     printTableMonitor()
   else
   
   end
-  
-  tp:draw()
   
   -- CONSOLE
   shell.run("clear")
