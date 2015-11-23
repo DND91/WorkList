@@ -3,6 +3,22 @@ os.loadAPI("touchpoint")
 
 -- I'M KORWIN A RETARTED WORKSHOP LIST!!
 
+function saveTable(name, t)
+  local file = fs.open(name,"w")
+  file.write(textutils.serialize(t))
+  file.close()
+end
+
+function loadTable(name)
+  if not fs.exists(name) then
+    return {}
+  end
+  local file = fs.open(name,"r")
+  local data = file.readAll()
+  file.close()
+  return textutils.unserialize(data)
+end
+
 -- VARIABELS --
 
 local taskMode = true
@@ -51,8 +67,6 @@ local tableWidth = 36
 local tableHeight = 4
 local tableSpace = 1
 
-local tasks = {}
-
 Task = {}
 Task.__index = Task
 
@@ -84,8 +98,6 @@ function Task:printTask()
   printinput(self.worker)
 end
 
-local workers = {}
-
 Worker = {}
 Worker.__index = Worker
 
@@ -112,24 +124,22 @@ function Worker:printWorker()
   
   monitor.setTextColor(self.color)
   
-  monitor.setCursorPos(x+(tableWidth-#self.status)/2,y+(tableHeight/2)-1)
+  monitor.setCursorPos(x+(tableWidth-#self.name)/2,y+(tableHeight/2)-1)
   printinput(self.name)
   
-  monitor.setCursorPos(x+(tableWidth-#self.task)/2,y+(tableHeight/2))
+  monitor.setCursorPos(x+(tableWidth-#self.abre)/2,y+(tableHeight/2))
   printinput(self.abre)
   
-  monitor.setCursorPos(x+(tableWidth-#self.worker)/2,y+(tableHeight/2)+1)
-  printinput(self.color)
+  monitor.setCursorPos(x+(tableWidth-#tostring(self.color))/2,y+(tableHeight/2)+1)
+  printinput(tostring(self.color))
   
   monitor.setTextColor(colors.white)
 end
 
+local tasks = loadTable("tasks.save")
+local workers = loadTable("workers.save")
 
 -- DEBUG SETUP --
-
-for i=0,20,1 do
-  table.insert(tasks, Task.create())
-end
 
 -- FUNCTIONS --
  
@@ -376,6 +386,7 @@ function screenEnterHandler(key)
       answer = "Worker added..."
       table.insert(workers, temp)
       temp = nil
+      saveTable("workers.save", workers)
     end
     input = ""
     return ""
