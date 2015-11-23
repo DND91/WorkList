@@ -3,6 +3,7 @@ os.loadAPI("touchpoint")
 os.loadAPI("dnd_util")
 os.loadAPI("Task")
 os.loadAPI("Worker")
+os.loadAPI("MainScreen")
 
 -- I'M KORWIN A RETARTED WORKSHOP LIST!!
 
@@ -329,21 +330,27 @@ function screenEnterHandler(key)
   return "\n"
 end
 
+
+
 while running do -- MAIN LOOP
   local event, param1, param2, param3 = tp:handleEvents(os.pullEvent())
   -- local event, key, isHeld = os.pullEvent("key")
   -- EVENT HANDLING
-  if event == "char" then
-    handleChar(param1)
-  elseif event == "key" then
-    handleKey(param1, param2)
-  elseif event == "button_click" then
+  -- if event == "char" then
+  --  handleChar(param1)
+  -- elseif event == "key" then
+  --  handleKey(param1, param2)
+  if event == "button_click" then
     tp:toggleButton(param1)
     tp.buttonList[param1].func()
+  else
+    currentScreen:event(event, param1, param2, param3)
   end
   -- BODY
-  -- MONITOR
   
+  currentScreen:update()
+  
+  -- MONITOR
   
   monitor.clear()
   tp:draw()
@@ -363,7 +370,8 @@ while running do -- MAIN LOOP
   -- CONSOLE
   shell.run("clear")
   term.setCursorPos(1, 1)
-  screenHandler()
+  -- screenHandler()
+  currentScreen:draw()
 end
 
 
