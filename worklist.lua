@@ -135,9 +135,39 @@ function Worker:printWorker()
   
   monitor.setTextColor(colors.white)
 end
+-- table.insert(workers, temp)
+function loadWorkers()
+  local data = loadTable("workers.save")
+  local workers = {}
+  
+  for _, v in pairs(data) do
+    local worker = Worker.create()
+    worker.name = v.name
+    worker.abre = v.abre
+    worker.color = v.color
+    table.insert(workers, worker)
+  end
+  
+  return workers
+end
 
-local tasks = loadTable("tasks.save")
-local workers = loadTable("workers.save")
+function loadTasks()
+  local data = loadTable("tasks.save")
+  local tasks = {}
+  
+  for _, v in pairs(data) do
+    local task = Task.create()
+    task.status = v.status
+    task.task = v.task
+    task.worker = v.worker
+    table.insert(tasks, task)
+  end
+  
+  return tasks
+end
+
+local tasks = loadTasks()
+local workers = loadWorkers()
 
 -- DEBUG SETUP --
 
