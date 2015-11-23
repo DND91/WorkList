@@ -14,13 +14,13 @@ function TaskScreen.create()
 end
 
 function TaskScreen:draw()
-    printCenterCon(" === TASKS === ")
-    printCenterCon("1. Add")
-    printCenterCon("2. Remove")
-    printCenterCon("3. Update")
-    printCenterCon("4. Back")
-    printCenterCon("Answer: " .. answer)
-    printCenterCon("- Choose menu -")
+  dnd_util.printCenterCon(" === TASKS === ")
+  dnd_util.printCenterCon("1. Add")
+  dnd_util.printCenterCon("2. Remove")
+  dnd_util.printCenterCon("3. Update")
+  dnd_util.printCenterCon("4. Back")
+  dnd_util.printCenterCon("Answer: " .. answer)
+  dnd_util.printCenterCon("- Choose menu -")
   dnd_util.printCenterCon(dnd_util.input)
 end
 
@@ -33,8 +33,8 @@ function TaskScreen:handleEvent(event, param1, param2, param3)
    dnd_util.handleChar(param1)
   elseif event == "key" then
    if param1 == keys.enter then
-      if dnd_utils.input == "4" then
-        dnd_utils.input = ""
+      if dnd_util.input == "4" then
+        dnd_util.input = ""
         Env.currentScreen = MainScreen.MainScreen.create()
       end
    else

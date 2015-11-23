@@ -32,8 +32,8 @@ function MainScreen:handleEvent(event, param1, param2, param3)
    dnd_util.handleChar(param1)
   elseif event == "key" then
    if param1 == keys.enter then
-    if dnd_utils.input == "1" then
-        dnd_utils.input = ""
+    if dnd_util.input == "1" then
+        dnd_util.input = ""
         Env.currentScreen = TaskScreen.TaskScreen.create()
       end
    else
