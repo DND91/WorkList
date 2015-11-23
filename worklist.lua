@@ -300,7 +300,7 @@ while running do -- MAIN LOOP
     tp:toggleButton(param1)
     tp.buttonList[param1].func()
   else
-    Env.currentScreen:event(event, param1, param2, param3)
+    Env.currentScreen:handleEvent(event, param1, param2, param3)
   end
   -- BODY
   

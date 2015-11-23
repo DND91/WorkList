@@ -4,6 +4,8 @@ os.loadAPI("Env")
 MainScreen = {}
 MainScreen.__index = MainScreen
 
+local anser = ""
+
 function MainScreen.create()
    local self = setmetatable({},MainScreen)
    self.name = "KORWIN"
@@ -17,14 +19,14 @@ function MainScreen:draw()
   dnd_util.printCenterCon("3. Exit")
   dnd_util.printCenterCon("Answer: " .. answer)
   dnd_util.printCenterCon("- Choose menu -")
-  dnd_util.printCenterCon(input)
+  dnd_util.printCenterCon(dnd_util.input)
 end
 
 function MainScreen:update()
   
 end
 
-function MainScreen:event(event, param1, param2, param3)
+function MainScreen:handleEvent(event, param1, param2, param3)
   if event == "char" then
    dnd_util.handleChar(param1)
   elseif event == "key" then
