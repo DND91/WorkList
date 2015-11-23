@@ -1,23 +1,10 @@
 
 os.loadAPI("touchpoint")
+os.loadAPI("dnd_util")
+os.loadAPI("Task")
+os.loadAPI("Worker")
 
 -- I'M KORWIN A RETARTED WORKSHOP LIST!!
-
-function saveTable(name, t)
-  local file = fs.open(name,"w")
-  file.write(textutils.serialize(t))
-  file.close()
-end
-
-function loadTable(name)
-  if not fs.exists(name) then
-    return {}
-  end
-  local file = fs.open(name,"r")
-  local data = file.readAll()
-  file.close()
-  return textutils.unserialize(data)
-end
 
 -- VARIABELS --
 
@@ -48,93 +35,10 @@ local screennr = 0
 
 local temp = nil
 
--- screens
--- 0. main menu
-
--- 1. tasks
-
--- 11. add task
--- 12. remove task
--- 13. update task
-
--- 2. workers
-
--- 21. add worker
--- 22. remove worker
--- 23. update worker
-
 local tableWidth = 36
 local tableHeight = 4
 local tableSpace = 1
 
-Task = {}
-Task.__index = Task
-
-function Task.create()          -- our new object
-   local self = setmetatable({},Task)  -- make Account handle lookup
-   self.status = "Nonactive"      -- initialize our object
-   self.task = "X"
-   self.worker = "none"
-   return self
-end
-
-function Task:printTask()
-  local x, y = monitor.getCursorPos()
-  local w,h = monitor.getSize()
-  printinput(repeats("=", tableWidth))
-  for i=1, tableHeight-1, 1 do
-    monitor.setCursorPos(x,y+i)
-    printinput("||")
-    monitor.setCursorPos(x+tableWidth-2,y+i)
-    printinput("||")
-  end
-  monitor.setCursorPos(x,y+tableHeight)
-  printinput(repeats("=", tableWidth))
-  monitor.setCursorPos(x+(tableWidth-#self.status)/2,y+(tableHeight/2)-1)
-  printinput(self.status)
-  monitor.setCursorPos(x+(tableWidth-#self.task)/2,y+(tableHeight/2))
-  printinput(self.task)
-  monitor.setCursorPos(x+(tableWidth-#self.worker)/2,y+(tableHeight/2)+1)
-  printinput(self.worker)
-end
-
-Worker = {}
-Worker.__index = Worker
-
-function Worker.create()          -- our new object
-   local self = setmetatable({},Worker)  -- make Account handle lookup
-   self.name = "NAME"      -- initialize our object
-   self.abre = "NAM"
-   self.color = colors.green
-   return self
-end
-
-function Worker:printWorker()
-  local x, y = monitor.getCursorPos()
-  local w,h = monitor.getSize()
-  printinput(repeats("=", tableWidth))
-  for i=1, tableHeight-1, 1 do
-    monitor.setCursorPos(x,y+i)
-    printinput("||")
-    monitor.setCursorPos(x+tableWidth-2,y+i)
-    printinput("||")
-  end
-  monitor.setCursorPos(x,y+tableHeight)
-  printinput(repeats("=", tableWidth))
-  
-  monitor.setTextColor(self.color)
-  
-  monitor.setCursorPos(x+(tableWidth-#self.name)/2,y+(tableHeight/2)-1)
-  printinput(self.name)
-  
-  monitor.setCursorPos(x+(tableWidth-#self.abre)/2,y+(tableHeight/2))
-  printinput(self.abre)
-  
-  monitor.setCursorPos(x+(tableWidth-#tostring(self.color))/2,y+(tableHeight/2)+1)
-  printinput(tostring(self.color))
-  
-  monitor.setTextColor(colors.white)
-end
 -- table.insert(workers, temp)
 function loadWorkers()
   local data = loadTable("workers.save")
