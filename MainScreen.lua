@@ -24,7 +24,15 @@ function MainScreen:update()
 end
 
 function MainScreen:event(event, param1, param2, param3)
-  
+  if event == "char" then
+   handleChar(param1)
+  elseif event == "key" then
+   if param1 == keys.enter then
+    
+   else
+    handleKey(param1)
+   end
+  end
 end
 
 

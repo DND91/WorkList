@@ -1,6 +1,31 @@
 
 input = ""
 
+function handleChar(c)
+  input = input .. c
+end
+
+
+function keyToChar(key)
+  if key == keys.enter then
+    return "\n"
+  elseif key == keys.space then
+    return " "
+  elseif key == keys.backspace then
+    if input ~= "" then
+      input = string.sub(input,1,#input-1)
+    end
+    return ""
+  else
+    return ""
+  end
+end
+
+function handleKey(key, isHeld)
+  local c = keyToChar(key)
+  input = input .. c
+end
+
 function saveTable(name, t)
   local file = fs.open(name,"w")
   file.write(textutils.serialize(t))

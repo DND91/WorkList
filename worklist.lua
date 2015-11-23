@@ -79,37 +79,6 @@ local workers = loadWorkers()
  
 function repeats(s, n) return n > 0 and s .. repeats(s, n-1) or "" end
 
-function keyToChar(key)
-  if key == keys.enter then
-    return screenEnterHandler()
-  elseif key == keys.space then
-    return " "
-  elseif key == keys.backspace then
-    if input ~= "" then
-      input = string.sub(input,1,#input-1)
-    else
-      if screennr == 21 then
-        if input == "" and temp ~= nil then
-          if temp.name == nil then
-            screennr = 2
-          elseif temp.abre == nil then
-            input = temp.name
-            temp.name = nil
-          elseif temp.color == nil then
-            input = temp.abre
-            temp.abre = nil
-          end
-          if input == nil then
-            input = ""
-          end
-        end
-      end
-    end
-    return ""
-  else
-    return ""
-  end
-end
 
 function printClearinput(input)
   monitor.clear()
@@ -130,15 +99,6 @@ function printinput(input)
       monitor.write(c)
     end
   end
-end
-
-function handleKey(key, isHeld)
-  local c = keyToChar(key)
-  input = input .. c
-end
-
-function handleChar(c)
-  input = input .. c
 end
 
 function printTaskTable()
