@@ -145,22 +145,7 @@ end
 
 function screenHandler()
   if screennr == 0 then -- MAIN MENU
-    printCenterCon(" === MENU === ")
-    printCenterCon("1. Tasks")
-    printCenterCon("2. Workers")
-    printCenterCon("3. Exit")
-    printCenterCon("Answer: " .. answer)
-    printCenterCon("- Choose menu -")
-    printCenterCon(input)
-  elseif screennr == 1 then -- TASKS
-    printCenterCon(" === TASKS === ")
-    printCenterCon("1. Add")
-    printCenterCon("2. Remove")
-    printCenterCon("3. Update")
-    printCenterCon("4. Back")
-    printCenterCon("Answer: " .. answer)
-    printCenterCon("- Choose menu -")
-    printCenterCon(input)
+    
   elseif screennr == 2 then -- WORKERS
     printCenterCon(" === WORKERS === ")
     printCenterCon("1. Add")
@@ -290,12 +275,7 @@ end
 
 while running do -- MAIN LOOP
   local event, param1, param2, param3 = tp:handleEvents(os.pullEvent())
-  -- local event, key, isHeld = os.pullEvent("key")
   -- EVENT HANDLING
-  -- if event == "char" then
-  --  handleChar(param1)
-  -- elseif event == "key" then
-  --  handleKey(param1, param2)
   if event == "button_click" then
     tp:toggleButton(param1)
     tp.buttonList[param1].func()
@@ -326,17 +306,8 @@ while running do -- MAIN LOOP
   -- CONSOLE
   shell.run("clear")
   term.setCursorPos(1, 1)
-  -- screenHandler()
   Env.currentScreen:draw()
 end
-
-
--- PRINT FUNCTION
--- INPUT FUNCTION
--- INPUT TO CHAR CONVERTER
--- MAIN LOOP WITH MENU
--- SAVE/LOAD FILE; WORKLIST TABLE
--- BUTTON HANDLER FUNCTION
 
 
 
