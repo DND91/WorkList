@@ -4,7 +4,7 @@ os.loadAPI("Env")
 MainScreen = {}
 MainScreen.__index = MainScreen
 
-local anser = ""
+local answer = ""
 
 function MainScreen.create()
    local self = setmetatable({},MainScreen)

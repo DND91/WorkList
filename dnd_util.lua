@@ -2,7 +2,7 @@
 input = ""
 
 function handleChar(c)
-  input = input .. c
+  dnd_util.input = dnd_util.input .. c
 end
 
 
@@ -12,8 +12,8 @@ function keyToChar(key)
   elseif key == keys.space then
     return " "
   elseif key == keys.backspace then
-    if input ~= "" then
-      input = string.sub(input,1,#input-1)
+    if dnd_util.input ~= "" then
+      dnd_util.input = string.sub(dnd_util.input,1,#dnd_util.input-1)
     end
     return ""
   else
@@ -23,7 +23,7 @@ end
 
 function handleKey(key, isHeld)
   local c = keyToChar(key)
-  input = input .. c
+  dnd_util.input = dnd_util.input .. c
 end
 
 function saveTable(name, t)
