@@ -1,8 +1,5 @@
 os.loadAPI("dnd_util")
 
-currentScreen = MainScreen.create()
-
-
 MainScreen = {}
 MainScreen.__index = MainScreen
 
@@ -13,14 +10,6 @@ function MainScreen.create()
 end
 
 function MainScreen:draw()
-  
-end
-
-function MainScreen:update()
-  
-end
-
-function MainScreen:event(event, param1, param2, param3)
   printCenterCon(" === MENU === ")
   printCenterCon("1. Tasks")
   printCenterCon("2. Workers")
@@ -29,3 +18,14 @@ function MainScreen:event(event, param1, param2, param3)
   printCenterCon("- Choose menu -")
   printCenterCon(input)
 end
+
+function MainScreen:update()
+  
+end
+
+function MainScreen:event(event, param1, param2, param3)
+  
+end
+
+
+currentScreen = MainScreen.create()
