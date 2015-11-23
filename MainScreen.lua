@@ -1,5 +1,6 @@
 os.loadAPI("dnd_util")
 os.loadAPI("Env")
+os.loadAPI("TaskScreen")
 
 MainScreen = {}
 MainScreen.__index = MainScreen
@@ -31,7 +32,10 @@ function MainScreen:handleEvent(event, param1, param2, param3)
    dnd_util.handleChar(param1)
   elseif event == "key" then
    if param1 == keys.enter then
-    
+    if dnd_utils.input == "1" then
+        dnd_utils.input = ""
+        Env.currentScreen = TaskScreen.TaskScreen.create()
+      end
    else
     dnd_util.handleKey(param1)
    end
