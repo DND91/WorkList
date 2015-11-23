@@ -1,0 +1,2 @@
+
+currentScreen = nil

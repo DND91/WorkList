@@ -1,5 +1,7 @@
+os.loadAPI("Env")
 
 os.loadAPI("touchpoint")
+
 os.loadAPI("Task")
 os.loadAPI("Worker")
 
@@ -43,11 +45,11 @@ local tableSpace = 1
 
 -- table.insert(workers, temp)
 function loadWorkers()
-  local data = loadTable("workers.save")
+  local data = dnd_util.loadTable("workers.save")
   local workers = {}
   
   for _, v in pairs(data) do
-    local worker = Worker.create()
+    local worker = Worker.Worker.create()
     worker.name = v.name
     worker.abre = v.abre
     worker.color = v.color
@@ -58,11 +60,11 @@ function loadWorkers()
 end
 
 function loadTasks()
-  local data = loadTable("tasks.save")
+  local data = dnd_util.loadTable("tasks.save")
   local tasks = {}
   
   for _, v in pairs(data) do
-    local task = Task.create()
+    local task = Task.Task.create()
     task.status = v.status
     task.task = v.task
     task.worker = v.worker
@@ -298,11 +300,11 @@ while running do -- MAIN LOOP
     tp:toggleButton(param1)
     tp.buttonList[param1].func()
   else
-    currentScreen:event(event, param1, param2, param3)
+    Env.currentScreen:event(event, param1, param2, param3)
   end
   -- BODY
   
-  currentScreen:update()
+  Env.currentScreen:update()
   
   -- MONITOR
   
@@ -325,7 +327,7 @@ while running do -- MAIN LOOP
   shell.run("clear")
   term.setCursorPos(1, 1)
   -- screenHandler()
-  currentScreen:draw()
+  Env.currentScreen:draw()
 end
 
 

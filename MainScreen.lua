@@ -1,4 +1,5 @@
 os.loadAPI("dnd_util")
+os.loadAPI("Env")
 
 MainScreen = {}
 MainScreen.__index = MainScreen
@@ -36,4 +37,4 @@ function MainScreen:event(event, param1, param2, param3)
 end
 
 
-currentScreen = MainScreen.create()
+Env.currentScreen = MainScreen.create()
