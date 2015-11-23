@@ -1,6 +1,5 @@
 
 os.loadAPI("touchpoint")
-os.loadAPI("dnd_util")
 os.loadAPI("Task")
 os.loadAPI("Worker")
 os.loadAPI("MainScreen")
@@ -178,13 +177,6 @@ function printWorkerTable()
       end
     end
   end
-end
-
-function printCenterCon(txt)
-  local x, y = term.getCursorPos()
-  local w, h = term.getSize()
-  term.setCursorPos(math.floor(w - #txt)/2, y)
-  print(txt)
 end
 
 function screenHandler()

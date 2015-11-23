@@ -1,5 +1,5 @@
 
-
+input = ""
 
 function saveTable(name, t)
   local file = fs.open(name,"w")
@@ -17,3 +17,9 @@ function loadTable(name)
   return textutils.unserialize(data)
 end
 
+function printCenterCon(txt)
+  local x, y = term.getCursorPos()
+  local w, h = term.getSize()
+  term.setCursorPos(math.floor(w - #txt)/2, y)
+  print(txt)
+end
